@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="energyapi" />
         <module name="GUI" />
+        <module name="energy-user" />
         <module name="energy-gui" />
         <module name="energy-producer" />
       </profile>
@@ -16,6 +17,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="energy-producer" options="-parameters" />
+      <module name="energy-user" options="-parameters" />
       <module name="energyapi" options="-parameters" />
     </option>
   </component>
