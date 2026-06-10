@@ -6,6 +6,7 @@ services:
     environment:
       - POSTGRES_USER=disysuser
       - POSTGRES_PASSWORD=disyspw
+      - POSTGRES_DB=energydb
   
   rabbitmq:
     image: rabbitmq:management-alpine
