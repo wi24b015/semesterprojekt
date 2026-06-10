@@ -1,4 +1,4 @@
-package com.energy.energy_user;
+package com.example.energyapi;
 
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;

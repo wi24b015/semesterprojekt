@@ -1,0 +1,14 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Start Distributed System Test",
+      "type": "shell",
+      "command": "& \"C:\\Program Files\\Git\\bin\\bash.exe\" .\\test_distributed_systems.sh --live",
+      "options": {
+        "cwd": "C:\\Users\\flori\\Git_Repositorys\\semesterprojekt"
+      },
+      "problemMatcher": []
+    }
+  ]
+}
