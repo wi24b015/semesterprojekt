@@ -2,10 +2,11 @@ services:
   database:
     image: postgres:alpine
     ports:
-      - '5432:5432'
+      - '5433:5432'
     environment:
       - POSTGRES_USER=disysuser
       - POSTGRES_PASSWORD=disyspw
+      - POSTGRES_DB=energydb
   
   rabbitmq:
     image: rabbitmq:management-alpine

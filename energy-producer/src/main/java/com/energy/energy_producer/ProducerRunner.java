@@ -2,6 +2,7 @@ package com.energy.energy_producer;
 
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -9,6 +10,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Random;
 
 @Component
+@Profile("!test")
 public class ProducerRunner implements CommandLineRunner {
 
     private final RabbitTemplate rabbitTemplate;
