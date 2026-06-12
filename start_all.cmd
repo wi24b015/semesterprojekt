@@ -6,14 +6,35 @@ set "PROJECT=%~dp0"
 echo == Raeume alte Projekt-Prozesse auf ==
 call "%PROJECT%stop_all.cmd"
 
-echo == Starte Docker Infrastruktur ==
+echo == Pruefe Docker Infrastruktur ==
 pushd "%PROJECT%docker"
-docker compose up -d
+call :ensure_compose_service database
 if errorlevel 1 (
-    echo Docker konnte nicht gestartet werden.
+    echo Docker database konnte nicht gestartet werden.
+    popd
     pause
     exit /b 1
 )
+
+echo Starte database neu, um alte DB-Verbindungen zu schliessen ...
+docker compose restart database
+if errorlevel 1 (
+    echo Docker database konnte nicht neu gestartet werden.
+    popd
+    pause
+    exit /b 1
+)
+echo Warte 5 Sekunden auf PostgreSQL...
+timeout /t 5 /nobreak > nul
+
+call :ensure_compose_service rabbitmq
+if errorlevel 1 (
+    echo Docker rabbitmq konnte nicht gestartet werden.
+    pause
+    popd
+    exit /b 1
+)
+docker compose ps
 popd
 
 echo == Starte API in neuem Terminal ==
@@ -48,4 +69,26 @@ echo Live-Umgebung wurde gestartet.
 echo In der GUI kannst du refresh und show data testen.
 echo Dieses Fenster kann geschlossen werden.
 
+goto :finish
+
+:ensure_compose_service
+set "SERVICE=%~1"
+set "CONTAINER_ID="
+set "IS_RUNNING="
+
+for /f "delims=" %%i in ('docker compose ps -q %SERVICE%') do set "CONTAINER_ID=%%i"
+
+if defined CONTAINER_ID (
+    for /f "delims=" %%s in ('docker inspect -f "{{.State.Running}}" %CONTAINER_ID% 2^>nul') do set "IS_RUNNING=%%s"
+    if /I "%IS_RUNNING%"=="true" (
+        echo %SERVICE% laeuft bereits.
+        exit /b 0
+    )
+)
+
+echo Starte %SERVICE% ...
+docker compose up -d %SERVICE%
+exit /b %errorlevel%
+
+:finish
 endlocal

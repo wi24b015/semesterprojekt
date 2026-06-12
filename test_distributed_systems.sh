@@ -25,6 +25,10 @@ command -v curl >/dev/null || { echo "curl fehlt"; exit 1; }
 
 cd "$PROJECT"
 
+echo
+echo "== Stoppe alte lokale Projekt-Prozesse =="
+cmd.exe /c "C:\\Users\\flori\\Git_Repositorys\\semesterprojekt\\stop_all.cmd" || true
+
 cleanup() {
   echo
   echo "== Stoppe gestartete Spring Boot Prozesse =="
