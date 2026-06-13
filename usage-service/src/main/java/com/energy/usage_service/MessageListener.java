@@ -63,9 +63,10 @@ public class MessageListener {
     private void sendUpdateMessage(EnergyUsage usage) {
         EnergyUpdateDto updateMessage = new EnergyUpdateDto(
                 "UPDATE",
-                "COMMUNITY",
-                0.0,
-                usage.getHour()
+                usage.getHour(),
+                usage.getCommunityProduced(),
+                usage.getCommunityUsed(),
+                usage.getGridUsed()
         );
 
         rabbitTemplate.convertAndSend(

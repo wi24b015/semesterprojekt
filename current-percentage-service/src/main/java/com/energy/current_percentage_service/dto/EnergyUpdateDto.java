@@ -5,9 +5,10 @@ import java.io.Serializable;
 public class EnergyUpdateDto implements Serializable {
 
     private String type;
-    private String association;
-    private double kwh;
-    private String datetime;
+    private String hour;
+    private double communityProduced;
+    private double communityUsed;
+    private double gridUsed;
 
     public EnergyUpdateDto() {
     }
@@ -16,31 +17,19 @@ public class EnergyUpdateDto implements Serializable {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public String getHour() {
+        return hour;
     }
 
-    public String getAssociation() {
-        return association;
+    public double getCommunityProduced() {
+        return communityProduced;
     }
 
-    public void setAssociation(String association) {
-        this.association = association;
+    public double getCommunityUsed() {
+        return communityUsed;
     }
 
-    public double getKwh() {
-        return kwh;
-    }
-
-    public void setKwh(double kwh) {
-        this.kwh = kwh;
-    }
-
-    public String getDatetime() {
-        return datetime;
-    }
-
-    public void setDatetime(String datetime) {
-        this.datetime = datetime;
+    public double getGridUsed() {
+        return gridUsed;
     }
 }
