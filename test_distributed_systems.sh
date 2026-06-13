@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-PROJECT="/c/Users/flori/Git_Repositorys/semesterprojekt"
+PROJECT="$(cd "$(dirname "$0")" && pwd)"
 LOG_DIR="$PROJECT/test-logs"
 
 API_URL="http://localhost:8080"
