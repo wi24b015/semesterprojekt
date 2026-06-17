@@ -24,7 +24,6 @@ public class EnergyController {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
 
-    // Verbindung zu den Labels (fx:id)
     @FXML
     private Label lblPoolUsed;
     @FXML
@@ -36,7 +35,6 @@ public class EnergyController {
     @FXML
     private Label lblGrid;
 
-    // Verbindung zu den Kalendern
     @FXML
     private DatePicker dpStart;
     @FXML
